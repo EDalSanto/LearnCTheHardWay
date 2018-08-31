@@ -1,11 +1,16 @@
 CC = cc
 CFLAGS = -g -Wall
 TARGET = ex
+OBJECTS = ex.o
+
+.PHONY: all clean
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).c
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
+$(TARGET): $(OBJECTS)
+	$(CC) -o $(TARGET) $(OBJECTS) $(CFLAGS)
 
 clean:
-	$(RM) $(TARGET)
+	$(RM) $(TARGET) $(OBJECTS)
+
+re: clean all

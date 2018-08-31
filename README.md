@@ -22,8 +22,10 @@
   * final stage -> produces single executable file
 
 ### Make
+![SimpleMakefileRule](./images/SimpleMakefileRule.png)
 * [Make](https://www.gnu.org/software/make/) -> controls the genereation of executables and other non-source files of a program from the program's source files
   * Makefile -> tells make how to compile and link a program
+    * [examples](http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/)
   * enables end user to build and install package without knowing details
   * not limited to particular language (or even programming for that matter)
   * Rules and Targets
@@ -34,8 +36,13 @@
       * recipe -> action that make carries out
         * may have more than 1 command
     * can specify which targets to update; otherwise, Make will update first target
-  * How Make Works -> declare dependencies and then describe how to build them or rely on the program's internal knowledge of how to build most common software
-    * recompilation -> done if the source file, or any header files named as pre-reqs, is more than recent than the object file, or if the object file does not exist
+  * Phony Target -> one that is not really the name of a file
+    * name for a recipe to be executed when you make an explicit request
+    * can be used to avoid name conflict with a file and a target and performance
+  * How Make Works -> declare dependencies and then describe how to build them
+    * relies also on the program's internal knowledge of how to build most common software
+    * recompilation -> done if the source file, or any header files named as pre-reqs, is more recent than the object file, or if the object file does not exist
+      * make is smart enough to only recompile files that have changed
       * sidenote -> linkage takes care of name resolution in C
         * whether two or more declarations for that name are valid
 

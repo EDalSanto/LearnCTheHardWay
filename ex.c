@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Ch 1
 int main(int argc, char *argv[]) {
   int distance = 100;
 
