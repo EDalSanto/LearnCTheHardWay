@@ -46,3 +46,7 @@
         * whether two or more declarations for that name are valid
 
 * sidenote / reminder: can pass ENV variables before running a command and they will be set accordingly only during that command
+
+### Formatted Printing
+* self-sufficient programmer -> force yourself to answer your own question first, and then confirm that your answer is right
+
