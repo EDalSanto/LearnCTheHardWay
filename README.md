@@ -50,3 +50,9 @@
 ### Formatted Printing
 * self-sufficient programmer -> force yourself to answer your own question first, and then confirm that your answer is right
 
+### Using a Debugger
+* [GNU Debugger](https://www.gnu.org/software/gdb/) -> default linux debugger
+* [LLDB](https://lldb.llvm.org/) -> MacOS debugger
+  * interactive debugging console
+  * command structure -> <noun> <verb> [-options [option value]] [argument [argument...]]
+  * [commands](https://lldb.llvm.org/lldb-gdb.html)
