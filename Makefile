@@ -1,16 +1,18 @@
 CC = cc
 CFLAGS = -g -Wall
-TARGET = ex
-OBJECTS = ex.o
+PROGRAMS = ex1 ex3
 
 .PHONY: all clean
 
-all: $(TARGET)
+all: $(PROGRAMS)
 
-$(TARGET): $(OBJECTS)
-	$(CC) -o $(TARGET) $(OBJECTS) $(CFLAGS)
+ex1: ex1.c
+	$(CC) -o $@ $^ $(CFLAGS)
+
+ex3: ex3.c
+	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:
-	$(RM) $(TARGET) $(OBJECTS)
+	$(RM) $(PROGRAMS)
 
 re: clean all
