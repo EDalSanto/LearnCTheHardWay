@@ -1,3 +1,10 @@
+# %: -> target-patten to match anything
+# 	each target is associated with target-pattern to extract name from stem for prereqs and executable file generated
+# %.c -> prereq-pattern
+# $< -> automatic variable that holds name of prereq
+# $@ -> automatic variable that holds name of target
+# more info: https://www.gnu.org/software/make/manual/html_node/Static-Usage.html#Static-Usage
+
 CC = cc
 CFLAGS = -g -Wall
 PROGRAMS = ex1 ex3
@@ -6,11 +13,8 @@ PROGRAMS = ex1 ex3
 
 all: $(PROGRAMS)
 
-ex1: ex1.c
-	$(CC) -o $@ $^ $(CFLAGS)
-
-ex3: ex3.c
-	$(CC) -o $@ $^ $(CFLAGS)
+$(PROGRAMS): %: %.c
+	$(CC) -o $@ $< $(CFLAGS)
 
 clean:
 	$(RM) $(PROGRAMS)
