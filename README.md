@@ -88,3 +88,29 @@
   * can only put expressions that results in integers
   * integers used to calculate jumps from top of the **switch** to the part(case) that matches the value
   * avoid fallthrough unless really desired
+
+### Arrays and Strings
+* setting just one element means rest of array will be filled with 0
+* nul byte, '\0', isn't visible when printed
+* source of almost all C bugs comes from forgetting to have enough space or forgetting to put a '\0' at the end of a string
+
+### Sizes and Arrays
+* sizeof operator -> returns number of bytes of data type or identifier
+* int type is believed to be 4 bytes and varies based on bit-size of CPU (i.e., 32-bit vs 64-bit)
+  * Compiler developers make reasonable choices based on underlying processors [stack](https://stackoverflow.com/questions/2331751/does-the-size-of-an-int-depend-on-the-compiler-and-or-processor)
+
+### For Loops and Arrays of Strings
+* C constructs arrays of strings as 2-dimensional array of nested char arrays
+* comma operator can be used in for loop for things like multiple assignments
+* NULL -> null pointer constant which means it points to an invalid object
+  * attempting to read / dereference leads to undefined behavior
+
+### Pointers
+* pointer -> simply an address pointing somewhere inside the computer's memory with a type specifier so that you get the right size of data with it
+  * **useful primarily when**:
+    * manipulating raw chunk of memory when using malloc
+    * pass large blocks of memory to functions with a pointer to avoid passing whole thing
+    * take the address of function to use it later as a dynamic callback
+    * scan complex chunks of memory 
+
+### Structs and Pointers to Them
