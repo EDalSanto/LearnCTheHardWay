@@ -111,6 +111,11 @@
     * manipulating raw chunk of memory when using malloc
     * pass large blocks of memory to functions with a pointer to avoid passing whole thing
     * take the address of function to use it later as a dynamic callback
-    * scan complex chunks of memory 
+    * scan complex chunks of memory
 
 ### Structs and Pointers to Them
+* if I have a create function (one that uses malloc), I always need a destroy function
+* structure -> collection of different data types (variables) that are stored in one block of memory
+  * can access each variable independently by name
+  * C handles memory structuring of these compound data types
+    * requires breaking up block of memory accordingly for different type and keep track of where each field lives in memory

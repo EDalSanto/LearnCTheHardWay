@@ -7,7 +7,7 @@
 
 CC = cc
 CFLAGS = -g -Wall
-PROGRAMS = ex1 ex3 ex11 ex13 ex15
+PROGRAMS = ex1 ex3 ex11 ex13 ex15 ex16
 
 .PHONY: all clean
 
