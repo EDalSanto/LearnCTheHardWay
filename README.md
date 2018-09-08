@@ -119,3 +119,47 @@
   * can access each variable independently by name
   * C handles memory structuring of these compound data types
     * requires breaking up block of memory accordingly for different type and keep track of where each field lives in memory
+
+### Heap and Stack Memory Alloction
+* **stream** -> common, **logical interface** to **various devices** that compromise the computer
+  * **any hardware device** (disk file, the screen, the keyboard, a socket, etc.) will **look like another** to a programmer
+  * **FILE** -> **C structure** that holds various kinds of **information** about **stream objects**, such as **size** and **file position**
+    * defined in stdio.h
+  * file -> most important form of stream; represents an array of bytes, regardless of it being a text file or binary file
+    * on disk as continuous series of streams that has one starting point and one ending point
+      * all data stored in binary, whether "text" or "binary" file
+        * **text file** -> **all units of data** are **1 byte** which represents **1 character**
+          * **need** to **know** the type of **encoding** to can read characters from text stream
+        * **binary file** -> continuous series of bits where **unit of data is not fixed** as it can be **any data type** (int, float, char, etc.)
+  * standard streams (possible to redirect any of these streams)
+    * `FILE *stdin` -> standard input stream, normal source of input for program
+    * `FILE *stdout` -> standard out stream, normal source of output for program
+    * `FILE *stderr` -> used for error messages and diagnostics for program
+  * **buffering** -> **dealing with data in blocks** instead of one unit at a time
+    * characters that are written to a stream are normally accumulated and transmitted asynchronously to the file in a block
+    * streams often receive input from the host environment in blocks rather than character by character
+    * **buffering strategies**
+      * unbuffered stream -> transmitted individually to or from the file as soon as possible
+      * line buffered stream -> transmitted to the file in blocks when a newline character is encountered
+      * fully buffered stream -> transmitted to the file in arbitrary block sizes
+    * **flushing buffers** -> **transmitting all** accumulated characters to the file **at once** in a buffered stream
+      * buffered output on a stream is flushed automatically when:
+        * buffer if full
+        * stream is closed
+        * program terminates
+        * input operation reads data
+* Low-Level Input/Output
+  * performed directly on file descriptors
+  * generally prefer performing operators on streams unless necessary to use file descriptors
+    * **file descriptors** -> number in OS that **uniquely identifies an opened file**
+* Stack vs Heap Allocation
+  * Stack
+    * C compiler puts all temporary variables, i.e., arguments to a function, are put onto the stack
+      * when function exits / returns, C compiler pops these variables off stack to clean up
+  * Heap
+    * remaining chunk of memory in computer after stack that you access with malloc
+    * malloc is an OS function that returns a pointer to a piece of memory of the size you requested
+  * primary problems
+    * losing track of pointer to block of memory
+    * too much data on stack, i.e, when allocating large structs and arrays
+    * take a pointer to something on the stack, than pass and return it from function, the function receiving it will segfault, because the actual data will get popped off and disappear, pointing at dead space
