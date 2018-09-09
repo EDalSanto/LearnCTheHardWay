@@ -72,9 +72,15 @@ void Database_write(struct Connection *conn) {
   rewind(conn->file);
 
   // write max_rows to file
-
+  rc = fwrite(&conn->db->max_rows, sizeof(conn->db->max_rows), 1, conn->file);
+  if (rc != 1) {
+    die("Failed to write max_rows.", conn);
+  }
   // write max_data to file
-
+  rc = fwrite(&conn->db->max_data, sizeof(conn->db->max_data), 1, conn->file);
+  if (rc != 1) {
+    die("Failed to write max_data.", conn);
+  }
   // flush data from database to the file stream
   for (int i = 0; i < conn->db->max_rows; i++) {
     rc = fwrite((conn->db->rows + i), sizeof(struct Address), 1, conn->file);
@@ -90,10 +96,25 @@ void Database_write(struct Connection *conn) {
 }
 
 void Database_load(struct Connection *conn) {
-  int rc;
+  int rc, i;
+
+  // load max_rows from file
+  rc = fread(&conn->db->max_rows, sizeof(conn->db->max_rows), 1, conn->file);
+  if (rc != 1) {
+    die("Failed to load max rows.", conn);
+  }
+  // load max_data from file
+  rc = fread(&conn->db->max_data, sizeof(conn->db->max_data), 1, conn->file);
+  if (rc != 1) {
+    die("Failed to load max data.", conn);
+  }
+
+  // allocate space for all address structs
+  conn->db->rows = malloc(sizeof(struct Address) * conn->db->max_rows);
 
   // read data from file into Database
-  for (int i = 0; i < conn->db->max_rows; i++) {
+  for (i = 0; i < conn->db->max_rows; i++) {
+
     rc = fread((conn->db->rows + 1), sizeof(struct Address), 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
