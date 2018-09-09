@@ -246,6 +246,11 @@ void Database_get(struct Connection *conn, int row_id) {
 void Database_delete(struct Connection *conn, int row_id) {
   // temp local address with id and set values defined
   struct Address addr = { .row_id = row_id, .set = 0 };
+  // set name and email
+  addr.name = malloc(conn->db->max_data * sizeof(char));
+  addr.name = memset(addr.name, ' ', conn->db->max_data);
+  addr.email = malloc(conn->db->max_data * sizeof(char));
+  addr.email = memset(addr.email, ' ', conn->db->max_data);
   // copied into rows array
   conn->db->rows[row_id] = addr;
 }
@@ -254,7 +259,7 @@ void Database_list(struct Connection *conn) {
   int i = 0;
   struct Database *db = conn->db;
 
-  for (i = 0; i < MAX_ROWS; i++) {
+  for (i = 0; i < db->max_rows; i++) {
     struct Address *cur = &db->rows[i];
 
     if (cur->set) {
