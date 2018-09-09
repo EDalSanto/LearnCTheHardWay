@@ -115,7 +115,7 @@ void Database_load(struct Connection *conn) {
   // read data from file into Database
   for (i = 0; i < conn->db->max_rows; i++) {
 
-    rc = fread((conn->db->rows + 1), sizeof(struct Address), 1, conn->file);
+    rc = fread((conn->db->rows + i), sizeof(struct Address), 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
@@ -191,6 +191,7 @@ void Database_set(struct Connection *conn, int row_id, const char *name, const c
   }
 }
 
+// working on getting this right..at least I think set is working
 void Database_get(struct Connection *conn, int row_id) {
   struct Address *addr = &conn->db->rows[row_id];
 
