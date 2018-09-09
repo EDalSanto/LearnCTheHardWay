@@ -122,6 +122,7 @@
 
 ### Heap and Stack Memory Alloction
 * **stream** -> common, **logical interface** to **various devices** that compromise the computer
+![stream](images/stream.png)
   * **any hardware device** (disk file, the screen, the keyboard, a socket, etc.) will **look like another** to a programmer
   * **FILE** -> **C structure** that holds various kinds of **information** about **stream objects**, such as **size** and **file position**
     * defined in stdio.h
@@ -163,4 +164,8 @@
     * losing track of pointer to block of memory
     * too much data on stack, i.e, when allocating large structs and arrays
     * take a pointer to something on the stack, than pass and return it from function, the function receiving it will segfault, because the actual data will get popped off and disappear, pointing at dead space
-* Database Project
+* Database Project -> much more in-depth than past and cool; should highlight
+* [Struct Packing](http://www.catb.org/esr/structure-packing/) -> about reducing the memory footprint of programs in compiled programs like C
+  * useful when writing code for memory-constrained embedded systems or OS kernels
+  * useful working with data sets in program that routinely hits memory limits
+  * useful topic in other compiled languages with C-like structures, i.e., Go and Rust
