@@ -61,6 +61,11 @@ void Database_create(struct Connection *conn, int max_rows, int max_data) {
   for (i = 0; i < conn->db->max_rows; i++) {
     // make a prototype to initialize it
     struct Address addr = { .row_id = i, .set = 0 };
+    // set name and email
+    addr.name = malloc(max_data * sizeof(char));
+    addr.name = memset(addr.name, ' ', max_data);
+    addr.email = malloc(max_data * sizeof(char));
+    addr.email = memset(addr.email, ' ', max_data);
     // set memory address to address struct
     conn->db->rows[i] = addr;
   }
@@ -68,6 +73,7 @@ void Database_create(struct Connection *conn, int max_rows, int max_data) {
 
 void Database_write(struct Connection *conn) {
   int rc;
+  struct Address *row;
 
   rewind(conn->file);
 
@@ -83,10 +89,28 @@ void Database_write(struct Connection *conn) {
   }
   // flush data from database to the file stream
   for (int i = 0; i < conn->db->max_rows; i++) {
-    rc = fwrite((conn->db->rows + i), sizeof(struct Address), 1, conn->file);
+    row = conn->db->rows + i;
+    rc = fwrite(&row->row_id, sizeof(row->row_id), 1, conn->file);
     if (rc != 1) {
-      die("Failed to write database.", conn);
+      die("Failed to load database.", conn);
     }
+    rc = fwrite(&row->set, sizeof(row->set), 1, conn->file);
+    if (rc != 1) {
+      die("Failed to load database.", conn);
+    }
+    rc = fwrite(row->name, sizeof(*row->name) * conn->db->max_data, 1, conn->file);
+    if (rc != 1) {
+      die("Failed to load database.", conn);
+    }
+    rc = fwrite(row->email, sizeof(*row->email) * conn->db->max_data, 1, conn->file);
+    if (rc != 1) {
+      die("Failed to load database.", conn);
+    }
+
+    //rc = fwrite((conn->db->rows + i), sizeof(struct Address), 1, conn->file);
+    //if (rc != 1) {
+    //  die("Failed to write database.", conn);
+    //}
   }
 
   rc = fflush(conn->file);
@@ -97,7 +121,7 @@ void Database_write(struct Connection *conn) {
 
 void Database_load(struct Connection *conn) {
   int rc, i;
-  struct Address *addr;
+  struct Address *row;
 
   // load max_rows from file
   rc = fread(&conn->db->max_rows, sizeof(conn->db->max_rows), 1, conn->file);
@@ -115,24 +139,24 @@ void Database_load(struct Connection *conn) {
 
   // read data from file into Database
   for (i = 0; i < conn->db->max_rows; i++) {
-    addr = conn->db->rows + i;
-    rc = fread(&addr->row_id, sizeof(addr->row_id), 1, conn->file);
+    row = conn->db->rows + i;
+    rc = fread(&row->row_id, sizeof(row->row_id), 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
-    rc = fread(&addr->set, sizeof(addr->set), 1, conn->file);
+    rc = fread(&row->set, sizeof(row->set), 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
-    // allocate space for name and email parts of addr..
-    addr->name = malloc(sizeof(*addr->name) * conn->db->max_data);
-    addr->email = malloc(sizeof(*addr->email) * conn->db->max_data);
+    // allocate space for name and email parts of row..
+    row->name = malloc(sizeof(*row->name) * conn->db->max_data);
+    row->email = malloc(sizeof(*row->email) * conn->db->max_data);
     // read both
-    rc = fread(addr->name, sizeof(*addr->name) * conn->db->max_data, 1, conn->file);
+    rc = fread(row->name, sizeof(*row->name) * conn->db->max_data, 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
-    rc = fread(addr->email, sizeof(*addr->email) * conn->db->max_data, 1, conn->file);
+    rc = fread(row->email, sizeof(*row->email) * conn->db->max_data, 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
