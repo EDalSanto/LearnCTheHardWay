@@ -13,7 +13,7 @@ PROGRAMS = ex1 ex3 ex11 ex13 ex15 ex16 ex17
 
 all: $(PROGRAMS)
 
-$(PROGRAMS): %: %.c
+$(PROGRAMS): %: src/%.c
 	$(CC) -o $@ $< $(CFLAGS)
 
 clean:
