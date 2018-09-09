@@ -15,9 +15,9 @@ struct Address {
 };
 
 struct Database {
-  struct Address *rows; // rows is a pointer to an Address struct
-  int max_rows;
-  int max_data;
+  struct Address *rows; // rows is a pointer to an array of Address structs
+  int max_rows; // max number of rows allowed in db
+  int max_data; // max data size for field in row
 };
 
 struct Connection {
@@ -25,8 +25,10 @@ struct Connection {
   struct Database *db;
 };
 
+/* declare close to be used in die */
 void Database_close(struct Connection *conn);
 
+/* abort program and clean up db connection */
 void die(const char *message, struct Connection *conn) {
   // when an error returns from a function, it usually sets an external variable
   // called errno to say exatly happened
@@ -43,10 +45,12 @@ void die(const char *message, struct Connection *conn) {
   exit(1);
 }
 
+/* print addr / row */
 void Address_print(struct Address *addr) {
   printf("%d %s %s\n", addr->row_id, addr->name, addr->email);
 }
 
+/* create DB */
 void Database_create(struct Connection *conn, int max_rows, int max_data) {
   int i = 0;
 
@@ -55,9 +59,10 @@ void Database_create(struct Connection *conn, int max_rows, int max_data) {
   // add max_data
   conn->db->max_data = max_data;
 
-  // allocate space for all address structs
+  // allocate space for all Address structs
   conn->db->rows = malloc(sizeof(struct Address) * max_rows);
 
+  // fill out address row
   for (i = 0; i < conn->db->max_rows; i++) {
     // make a prototype to initialize it
     struct Address addr = { .row_id = i, .set = 0 };
@@ -66,11 +71,12 @@ void Database_create(struct Connection *conn, int max_rows, int max_data) {
     addr.name = memset(addr.name, ' ', max_data);
     addr.email = malloc(max_data * sizeof(char));
     addr.email = memset(addr.email, ' ', max_data);
-    // set memory address to address struct
+    // set value at memory address to address struct
     conn->db->rows[i] = addr;
   }
 }
 
+/* write database in-memory to file on disk */
 void Database_write(struct Connection *conn) {
   int rc;
   struct Address *row;
@@ -106,11 +112,6 @@ void Database_write(struct Connection *conn) {
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
-
-    //rc = fwrite((conn->db->rows + i), sizeof(struct Address), 1, conn->file);
-    //if (rc != 1) {
-    //  die("Failed to write database.", conn);
-    //}
   }
 
   rc = fflush(conn->file);
@@ -119,6 +120,7 @@ void Database_write(struct Connection *conn) {
   }
 }
 
+/* load db from file into memory */
 void Database_load(struct Connection *conn) {
   int rc, i;
   struct Address *row;
@@ -163,6 +165,7 @@ void Database_load(struct Connection *conn) {
   }
 }
 
+/* open db connection */
 struct Connection *Database_open(const char *filename, char mode) {
   struct Connection *conn = malloc(sizeof(struct Connection));
 
@@ -194,6 +197,7 @@ struct Connection *Database_open(const char *filename, char mode) {
   return conn;
 }
 
+/* close db connection */
 void Database_close(struct Connection *conn) {
   if (conn) {
     if (conn->file) {
@@ -208,6 +212,7 @@ void Database_close(struct Connection *conn) {
   }
 }
 
+/* set row in db */
 void Database_set(struct Connection *conn, int row_id, const char *name, const char *email) {
   // get the row_id element in rows, which is in db, which is in conn,
   // and then get its address
@@ -232,7 +237,7 @@ void Database_set(struct Connection *conn, int row_id, const char *name, const c
   }
 }
 
-// working on getting this right..at least I think set is working
+/* get row from db */
 void Database_get(struct Connection *conn, int row_id) {
   struct Address *addr = &conn->db->rows[row_id];
 
@@ -243,6 +248,7 @@ void Database_get(struct Connection *conn, int row_id) {
   }
 }
 
+/* delete row from db */
 void Database_delete(struct Connection *conn, int row_id) {
   // temp local address with id and set values defined
   struct Address addr = { .row_id = row_id, .set = 0 };
@@ -255,6 +261,7 @@ void Database_delete(struct Connection *conn, int row_id) {
   conn->db->rows[row_id] = addr;
 }
 
+/* list all records in db */
 void Database_list(struct Connection *conn) {
   int i = 0;
   struct Database *db = conn->db;
@@ -278,6 +285,7 @@ int main(int argc, char *argv[]) {
   struct Connection *conn = Database_open(filename, action);
   int row_id = 0;
 
+  // get row id for actions that require it
   if (action == 'g' || action == 's' || action == 'd') {
     row_id = atoi(argv[3]);
 
