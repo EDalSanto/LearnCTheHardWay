@@ -248,6 +248,34 @@ void Database_get(struct Connection *conn, int row_id) {
   }
 }
 
+void *Database_find(struct Connection *conn, char *field_name, char *field_value) {
+  // ignore non valid attrs
+  if (strcmp(field_name, "name") != 0 && strcmp(field_name, "email") != 0) {
+    die("Must choose a field that exists", conn);
+  }
+
+  struct Address *addr;
+  int i = 0;
+
+  // look through each record for a match
+  for (i = 0; i < conn->db->max_rows; i++) {
+    addr = &conn->db->rows[i];
+
+    if (strcmp(field_name, "name") == 0) {
+      if (strcmp(addr->name, field_value) == 0) {
+        return addr;
+      }
+    }
+    if (strcmp(field_name, "email") == 0) {
+      if (strcmp(addr->email, field_value) == 0) {
+        return addr;
+      }
+    }
+  }
+
+  return NULL;
+}
+
 /* delete row from db */
 void Database_delete(struct Connection *conn, int row_id) {
   // temp local address with id and set values defined
@@ -328,6 +356,21 @@ int main(int argc, char *argv[]) {
       break;
     case 'l':
       Database_list(conn);
+      break;
+    case 'f':
+      if (argc != 5) {
+        die("Need a field name and value", conn);
+      }
+      void *addr;
+      char *field_name = malloc(strlen(argv[3]) + 1);
+      char *field_value = malloc(strlen(argv[4]) + 1);
+      strcpy(field_name, argv[3]);
+      strcpy(field_value, argv[4]);
+      addr = Database_find(conn, field_name, field_value);
+      if (addr) {
+        printf("Found field %s with value %s\n", field_name, field_value);
+        Address_print(addr);
+      }
       break;
     default:
       die("Invalid action: c=create, g=get, s=set, d=del, l=list", conn);
