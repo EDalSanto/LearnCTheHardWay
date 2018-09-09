@@ -97,6 +97,7 @@ void Database_write(struct Connection *conn) {
 
 void Database_load(struct Connection *conn) {
   int rc, i;
+  struct Address *addr;
 
   // load max_rows from file
   rc = fread(&conn->db->max_rows, sizeof(conn->db->max_rows), 1, conn->file);
@@ -114,8 +115,24 @@ void Database_load(struct Connection *conn) {
 
   // read data from file into Database
   for (i = 0; i < conn->db->max_rows; i++) {
-
-    rc = fread((conn->db->rows + i), sizeof(struct Address), 1, conn->file);
+    addr = conn->db->rows + i;
+    rc = fread(&addr->row_id, sizeof(addr->row_id), 1, conn->file);
+    if (rc != 1) {
+      die("Failed to load database.", conn);
+    }
+    rc = fread(&addr->set, sizeof(addr->set), 1, conn->file);
+    if (rc != 1) {
+      die("Failed to load database.", conn);
+    }
+    // allocate space for name and email parts of addr..
+    addr->name = malloc(sizeof(*addr->name) * conn->db->max_data);
+    addr->email = malloc(sizeof(*addr->email) * conn->db->max_data);
+    // read both
+    rc = fread(addr->name, sizeof(*addr->name) * conn->db->max_data, 1, conn->file);
+    if (rc != 1) {
+      die("Failed to load database.", conn);
+    }
+    rc = fread(addr->email, sizeof(*addr->email) * conn->db->max_data, 1, conn->file);
     if (rc != 1) {
       die("Failed to load database.", conn);
     }
