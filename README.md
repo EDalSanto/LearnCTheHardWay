@@ -169,3 +169,22 @@
   * useful when writing code for memory-constrained embedded systems or OS kernels
   * useful working with data sets in program that routinely hits memory limits
   * useful topic in other compiled languages with C-like structures, i.e., Go and Rust
+  * a lot less important topic recently because:
+    * CS has steered people away from micro-optimizations towards better algos
+    * machine resources have made squeezing memory less important
+  * Alignment Requirements
+    * storage for basic C datatypes on an x86 or ARM doesn't normally start at arbitrary addresses; each type has an alignment requirement
+      * 1 byte char on any byte address
+      * 2 byte shorts on even address
+      * 4 byte int on address divisible by 4
+    * basic C types are **self-aligned**
+    * [Geeks](https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/)
+      * mandated by the processor architecture
+      * historically memory is byte addressable and arranged sequentially
+        * arranged as a group to reduce number of memory cycles to fetch data
+          * i.e., if an integer is allocated at an address that is not a multiple of 4, it will require 2 memory cycles to fetch
+  * in general, struct instance will have the alignment of its widest scalar member -> easiest way to ensure that all the members are self-aligned for fast access
+    * compiler pads with "padding bytes" when necessary
+    * ![paddingBytes](images/paddingBytes.png)
+  * Bitfields -> give you the ability to declare structure fields of smaller than character width, down to 1 bit
+
