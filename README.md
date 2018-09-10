@@ -165,8 +165,8 @@
     * too much data on stack, i.e, when allocating large structs and arrays
     * take a pointer to something on the stack, than pass and return it from function, the function receiving it will segfault, because the actual data will get popped off and disappear, pointing at dead space
 * Database Project -> much more in-depth than past and cool; should highlight
-* [Struct Packing](http://www.catb.org/esr/structure-packing/) -> about reducing the memory footprint of programs in compiled programs like C
-  * useful when writing code for memory-constrained embedded systems or OS kernels
+* [Struct Packing](http://www.catb.org/esr/structure-packing/) -> about **reducing** the **memory footprint** of programs in compiled programs like C
+  * useful when writing code for **memory-constrained** embedded **systems** or OS kernels
   * useful working with data sets in program that routinely hits memory limits
   * useful topic in other compiled languages with C-like structures, i.e., Go and Rust
   * a lot less important topic recently because:
@@ -181,10 +181,10 @@
     * [Geeks](https://www.geeksforgeeks.org/structure-member-alignment-padding-and-data-packing/)
       * mandated by the processor architecture
       * historically memory is byte addressable and arranged sequentially
-        * arranged as a group to reduce number of memory cycles to fetch data
+        * **arranged as a group to reduce number of memory cycles to fetch data**
           * i.e., if an integer is allocated at an address that is not a multiple of 4, it will require 2 memory cycles to fetch
-  * in general, struct instance will have the alignment of its widest scalar member -> easiest way to ensure that all the members are self-aligned for fast access
-    * compiler pads with "padding bytes" when necessary
+  * in general, **struct instance** will have the **alignment** of its **widest scalar member** -> easiest way to ensure that all the members are self-aligned for fast access
+    * **compiler pads with "padding bytes" when necessary**
     * ![paddingBytes](images/paddingBytes.png)
   * Bitfields -> give you the ability to declare structure fields of smaller than character width, down to 1 bit
   * Structure Reodering -> avoid padding bytes
