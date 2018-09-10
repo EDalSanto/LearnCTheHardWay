@@ -8,10 +8,10 @@
 # define MAX_ROWS 100
 
 struct Address {
-  int row_id;
-  int set;
   char *name;
   char *email;
+  int row_id;
+  int set;
 };
 
 struct Database {

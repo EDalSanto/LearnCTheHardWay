@@ -187,4 +187,5 @@
     * compiler pads with "padding bytes" when necessary
     * ![paddingBytes](images/paddingBytes.png)
   * Bitfields -> give you the ability to declare structure fields of smaller than character width, down to 1 bit
-
+  * Structure Reodering -> avoid padding bytes
+    * simplest way is to reorder the structure members by decreasing alignment
