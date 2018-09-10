@@ -189,3 +189,19 @@
   * Bitfields -> give you the ability to declare structure fields of smaller than character width, down to 1 bit
   * Structure Reodering -> avoid padding bytes
     * simplest way is to reorder the structure members by decreasing alignment
+
+### Segway -> [ProgramStartUp](http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html)
+* first thing that's run is a function linked to every program named `_start`
+* how do we get to `_start`?
+  * shell calls `execve()` which sets up a stack and pushes argc, argv, and envp
+  * file desctipions 0, 1, 2 (stdin, stdout, stderr) are left to whatever shell set them to
+  * when everything is ready, control is finally handed over to `_start`
+* `_start`
+  * sets up stack memory alignment for memory and cache efficiency
+* `_libc_start_main`
+  * starts up threading
+  * calls init argument
+  * calls `main` with `argc` and `argv`
+* **enough for now** come back and visit when taking OS course
+
+### Pointers to Functions
