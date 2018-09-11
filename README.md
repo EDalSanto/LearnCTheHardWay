@@ -205,3 +205,4 @@
 * **enough for now** come back and visit when taking OS course
 
 ### Pointers to Functions
+* functions in C -> pointers to a spot in a program where some code exists
