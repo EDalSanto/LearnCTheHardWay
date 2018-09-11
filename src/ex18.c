@@ -14,7 +14,11 @@ void die(const char *message) {
 }
 
 // typedef creates a fake type, in this case for a function pointer
+// function pointer points to a function that returns an int and takes 2 ints as arguments
 typedef int (*compare_cb) (int a, int b);
+
+// create function pointer to sorting algo
+typedef int *(sort_cb) (int *numbers, int count, compare_cb cmp);
 
 /**
  * A Classic Bubble Sort function that uses the compare_cb to to do the sorting
@@ -61,9 +65,9 @@ int strange_order(int a, int b) {
 /**
  * Test sorting by sorting then printing
  */
-void test_sorting(int *numbers, int count, compare_cb cmp) {
+void test_sorting(sort_cb sort, int *numbers, int count, compare_cb cmp) {
   int i = 0;
-  int *sorted = bubble_sort(numbers, count, cmp);
+  int *sorted = sort(numbers, count, cmp);
 
   if (!sorted)
     die("Failed to sort as requested.");
@@ -81,6 +85,12 @@ void test_sorting(int *numbers, int count, compare_cb cmp) {
   for (i = 0; i < 25; i++) {
     printf("%02x:", data[i]);
   }
+
+  printf("\n");
+}
+
+void my_func() {
+
 }
 
 int main(int argc, char *argv[]) {
@@ -97,9 +107,16 @@ int main(int argc, char *argv[]) {
     numbers[i] = atoi(inputs[i]);
   }
 
-  test_sorting(numbers, count, sorted_order);
-  test_sorting(numbers, count, reverse_order);
-  test_sorting(numbers, count, strange_order);
+  // functions by default return address of stating point or entry point
+  // so passing function name here is essentially a function pointer (like in JS / Python)
+  test_sorting(bubble_sort, numbers, count, sorted_order);
+  test_sorting(bubble_sort, numbers, count, reverse_order);
+  test_sorting(bubble_sort, numbers, count, strange_order);
+  // wrong func for compare_cb
+  // passing void function parameter when expecting compare_cb type
+  //test_sorting(numbers, count, my_func);
+  // pass null -> segfault when trying to read memory at pointer
+  // test_sorting(numbers, count, NULL);
 
   free(numbers);
 

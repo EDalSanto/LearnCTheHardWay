@@ -206,3 +206,5 @@
 
 ### Pointers to Functions
 * functions in C -> pointers to a spot in a program where some code exists
+  * really a pointer to the address which represents the entry point to the series of instructions is the function
+* possible look at hex of executable to find where function is in raw program
