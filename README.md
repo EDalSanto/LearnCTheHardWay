@@ -208,3 +208,7 @@
 * functions in C -> pointers to a spot in a program where some code exists
   * really a pointer to the address which represents the entry point to the series of instructions is the function
 * possible look at hex of executable to find where function is in raw program
+
+### Zed's Awesome Debug Macros
+* Error Handling in programming languages difficult in general
+* C tackles problems by returning error codes and setting a global `errno` value
