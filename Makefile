@@ -8,7 +8,7 @@
 CC = cc
 CFLAGS = -g -Wall
 BIN_DIR = bin
-PROGRAMS = ex1 ex3 ex11 ex13 ex15 ex16 ex17 ex18
+PROGRAMS = ex1 ex3 ex11 ex13 ex15 ex16 ex17 ex18 ex19
 LIST=$(addprefix $(BIN_DIR)/, $(PROGRAMS))
 
 .PHONY: all clean

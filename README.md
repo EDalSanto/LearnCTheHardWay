@@ -126,7 +126,7 @@
   * **any hardware device** (disk file, the screen, the keyboard, a socket, etc.) will **look like another** to a programmer
   * **FILE** -> **C structure** that holds various kinds of **information** about **stream objects**, such as **size** and **file position**
     * defined in stdio.h
-  * file -> most important form of stream; represents an array of bytes, regardless of it being a text file or binary file
+  * **file** -> most important form of stream; represents an **array of bytes**, regardless of it being a text file or binary file
     * on disk as continuous series of streams that has one starting point and one ending point
       * all data stored in binary, whether "text" or "binary" file
         * **text file** -> **all units of data** are **1 byte** which represents **1 character**
