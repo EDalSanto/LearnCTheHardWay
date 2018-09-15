@@ -212,3 +212,6 @@
 ### Zed's Awesome Debug Macros
 * Error Handling in programming languages difficult in general
 * C tackles problems by returning error codes and setting a global `errno` value
+* Macros and CPP (C Preprocessor) -> CPP recursively replaces macros with expanded version of their definition, expanding all the macros within macros
+  * `##__VA_ARGS__` -> tell C Preprocessor to take arguments declared with ... and inject them as part of printf function
+  * Macros make it clear that doing error checking instead of normal if-statement
