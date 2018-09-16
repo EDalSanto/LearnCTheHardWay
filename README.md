@@ -215,3 +215,15 @@
 * Macros and CPP (C Preprocessor) -> CPP recursively replaces macros with expanded version of their definition, expanding all the macros within macros
   * `##__VA_ARGS__` -> tell C Preprocessor to take arguments declared with ... and inject them as part of printf function
   * Macros make it clear that doing error checking instead of normal if-statement
+
+### Advanced Data Types and Flow Control
+* stdint.h -> [header file](http://pubs.opengroup.org/onlinepubs/009695399/basedefs/stdint.h.html) that allows more portable code by defining a set of typedefs that specify exact-width integer types
+  * exact width types and their corresponding range only included in header if they exist for that specific compiler/processor
+    * "width" of integer type -> number of bits used to store its value in a pure binary system
+  * Representation of an Integer
+    * object -> consists of 0 or more padding bits, 1 or more value bits, and 0 or 1 sign bits depending on the signedness of the integer type
+    * value -> conceptual representation of integer
+  * minimum-width integer types -> specify a minimum number of bits for integer and compiler will round up if needed
+  * [fast integer types](https://stackoverflow.com/questions/16164025/difference-between-int32-t-and-int-fast32-t) -> integer must have a width of at least N
+
+### The Stack, Scope and Globals

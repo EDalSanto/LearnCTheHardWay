@@ -100,6 +100,9 @@ int main(int argc, char *argv[]) {
   check(test_check_mem() == -1, "test_check_mem failed");
   check(test_check_debug() == -1, "test_check_debug_failed");
 
+  int foo = 32;
+  debug("foo: %d", foo);
+
   return 0;
 
 error:
