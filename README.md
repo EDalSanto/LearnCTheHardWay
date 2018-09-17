@@ -227,3 +227,13 @@
   * [fast integer types](https://stackoverflow.com/questions/16164025/difference-between-int32-t-and-int-fast32-t) -> integer must have a width of at least N
 
 ### The Stack, Scope and Globals
+* extern -> variable defined to be available in any part of the program
+* static (file) -> variable defined to be available anywhere in .c program it is defined in
+* static (function) -> variable that acts like a static (file) but is only accessible from that function
+* C is always [pass by value](https://gabrieletolomei.wordpress.com/miscellanea/programming-languages/c-cpp/pass-by-value-vs-pass-by-reference/) and we can pass addresses / pointers to modify the underlying object which will always be the same
+
+# Meet Duff's Device
+* duff's device -> version of "loop unrolling" utilizing C switch statement and do / while loop
+  * loop unrolling -> reduces number of jumps and conditional branches to be taken by reducing number of iterations
+    * widely used when coding in assembly for minimizing the number of tests and branches during a copy
+    * time spent in loop reduced by reducing the number of loop tests
