@@ -130,7 +130,7 @@
     * on disk as continuous series of streams that has one starting point and one ending point
       * all data stored in binary, whether "text" or "binary" file
         * **text file** -> **all units of data** are **1 byte** which represents **1 character**
-          * **need** to **know** the type of **encoding** to can read characters from text stream
+          * **need** to **know** the type of **encoding** to read characters from text stream
         * **binary file** -> continuous series of bits where **unit of data is not fixed** as it can be **any data type** (int, float, char, etc.)
   * standard streams (possible to redirect any of these streams)
     * `FILE *stdin` -> standard input stream, normal source of input for program
@@ -232,8 +232,21 @@
 * static (function) -> variable that acts like a static (file) but is only accessible from that function
 * C is always [pass by value](https://gabrieletolomei.wordpress.com/miscellanea/programming-languages/c-cpp/pass-by-value-vs-pass-by-reference/) and we can pass addresses / pointers to modify the underlying object which will always be the same
 
-# Meet Duff's Device
+### Meet Duff's Device
 * duff's device -> version of "loop unrolling" utilizing C switch statement and do / while loop
   * loop unrolling -> reduces number of jumps and conditional branches to be taken by reducing number of iterations
     * widely used when coding in assembly for minimizing the number of tests and branches during a copy
     * time spent in loop reduced by reducing the number of loop tests
+
+### Input, Output, Files
+* fscanf -> opposite of printf, reads / scans input data based on format
+  * difficult to tell how big buffer is before reading it -> for this reason should generally avoid
+* fgets -> read a string from the input and make the buffer doesn't overflow
+
+### Variable Argument Functions
+* stdarg.h -> provides data structure and functions to manipulat it that allows handling a variable number of args
+* [pointer to pointers](https://stackoverflow.com/questions/897366/how-do-pointer-to-pointers-work-in-c)
+  * useful for passing address of string around to manipulate, i.e., to allocate space for it
+
+### Project logfind
+
