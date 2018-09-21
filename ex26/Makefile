@@ -1,9 +1,9 @@
 CC = cc
-CFLAGS = -g -Wall 
+CFLAGS = -g -Wall
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 
-bin: $(OBJ)
+logfind: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 	$(RM) $(OBJ)
 
@@ -11,6 +11,6 @@ bin: $(OBJ)
 .PHONY: clean
 
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) logfind
 
-re: clean bin
+re: clean logfind
