@@ -40,24 +40,13 @@ int main(int argc, char *argv[]) {
   if (argc < 2) {
     sentinel("Must pass at least one argument to program");
   }
-  // store inputs
-  //   skip executable in argv[0]
+  // parse args for flags
   for (i = 1; i < argc; i++) {
-    // check for -o flag
     if (strings_equal(argv[i], "-o")) {
       or_flag = 1;
-    } else {
-      search_term = argv[i];
-      // store search term somehow..
-      //   create way to track whether a token has been seen
-      //  {
-      //     token1: true,
-      //     token2: false
-      //  } -> hashmap in C..easier way maybe just have a variable for the token and a boolean for token found
     }
-    debug("arg: %s", search_term);
   }
-  // find all log files
+  // find all log files utilizing glob
   // for each log file
   //   open file
   //   read each line
@@ -87,3 +76,11 @@ int main(int argc, char *argv[]) {
 error:
   return -1;
 }
+
+/* IDEAS FOR IMPROVEMENT */
+// store search term somehow..
+//   create way to track whether a token has been seen
+//  {
+//     token1: true,
+//     token2: false
+//  } -> implement hashmap in C for probably better peformance but worst memory
