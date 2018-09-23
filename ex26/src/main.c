@@ -27,23 +27,23 @@ int line_is_flag(const char *line) {
   return line[0] == FLAG_INITIATOR;
 }
 
-// function that returns
-
 int main(int argc, char *argv[]) {
   FILE *stream;
   char *line, *search_term;
-  char args_matched[BUFFER_SIZE];
   size_t nread;
-  int more_lines_to_read, or_flag, i;
+  int more_lines_to_read, or_flag, i, matching_search_terms, num_search_terms;
 
   // make sure enough args passed
   if (argc < 2) {
     sentinel("Must pass at least one argument to program");
   }
-  // parse args for flags
+  // parse args for flags and search terms count
+  num_search_terms = 0;
   for (i = 1; i < argc; i++) {
     if (strings_equal(argv[i], "-o")) {
       or_flag = 1;
+    } else {
+      num_search_terms += 1;
     }
   }
   // find all log files utilizing glob
@@ -53,9 +53,11 @@ int main(int argc, char *argv[]) {
 
   // relative to the current working directory when the executable is run
   stream = fopen("./Makefile", "r");
-  //     reset booleans to false
   more_lines_to_read = getline(&line, &nread, stream) != -1;
   while (more_lines_to_read) {
+    // reset match statuses to false
+    matching_search_terms = 0;
+
     // search through all search tokens for match
     for (i = 1; i < argc; i++) {
       if (line_is_flag(argv[i])) continue;
@@ -63,14 +65,22 @@ int main(int argc, char *argv[]) {
       // see if current search term is match
       search_term = argv[i];
       if (substr_match(line, search_term)) {
-        debug("%s", line);
+        // mark token as matched if match
+        matching_search_terms += 1;
       }
     }
+
+    // print out match
+    if (!or_flag && (matching_search_terms == num_search_terms)) {
+      // num_search_termsprint out line if all tokens matched with AND
+      debug("%s", line);
+    } else if (or_flag && matching_search_terms) {
+      // print out line if any tokens matched with OR
+      debug("%s", line);
+    }
+
+    // read next line
     more_lines_to_read = getline(&line, &nread, stream) != -1;
-    //     mark token as matched if match
-    //       turn boolean to true
-    //     print out line if all tokens matched with AND
-    //     print out line if any tokens matched with OR
   }
   return 0;
 error:
@@ -83,4 +93,4 @@ error:
 //  {
 //     token1: true,
 //     token2: false
-//  } -> implement hashmap in C for probably better peformance but worst memory
+//  } -> implement hashmap in C for probably better scalability and clarity but worst memory
