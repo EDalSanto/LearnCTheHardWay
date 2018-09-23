@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
   //   read each line
 
   // relative to the current working directory when the executable is run
-  stream = fopen("./Makefile", "r");
+  stream = fopen("./logfile.log", "r");
   more_lines_to_read = getline(&line, &nread, stream) != -1;
   while (more_lines_to_read) {
     // reset match statuses to false
