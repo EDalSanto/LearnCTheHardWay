@@ -53,6 +53,7 @@ int main(int argc, char *argv[]) {
   glob("*.log", GLOB_DOOFFS, NULL, &glob_buf);
   debug("matched files %d", (int)glob_buf.gl_pathc);
   char **log_files = glob_buf.gl_pathv;
+
   // check each log file for match
   for (i = 0; i < glob_buf.gl_pathc; i++) {
     // relative to the current working directory when the executable is run
