@@ -249,4 +249,9 @@
   * useful for passing address of string around to manipulate, i.e., to allocate space for it
 
 ### Project logfind
+* reimplement simple Grep-like utility
+* possibly lost bytes from valigrind -> MACOS startup code causes leaks which can't be solved by developer
+  * [more info](https://stackoverflow.com/questions/36893494/valgrind-shows-memory-leak-with-empty-main-without-including-headers)
 
+### Creative and Defensive Programming
+*
