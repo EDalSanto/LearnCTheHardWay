@@ -254,4 +254,41 @@
   * [more info](https://stackoverflow.com/questions/36893494/valgrind-shows-memory-leak-with-empty-main-without-including-headers)
 
 ### Creative and Defensive Programming
-*
+* initially start in a **creative programmer** mindset to get **ideas flowing**
+  * good to have confidence in first iteration
+  * need to avoid being overly confident
+  * accept other's criticism
+* with **working, creative version, adopt a defensive programmer mindset**
+  * going to make many mistakes, so attempt to prevent them at every possible step
+  * you can never remove the errors, only reduce the probability
+* definsive programmer are **paranoid and fearful**, leading to little mistakes and **murdering creative energy and concentration**
+* **Eight Defensive Programmer Strategies**
+  * Never Trust Input -> never trust data given, always validate it
+    * Programmer's famous last words "Nobody's going to do that"
+    * steps
+      * identify precondtions for each parameter
+      * asserts (guard clauses) at top of function to assert preconditions
+      * be consistent with error handling
+  * Prevent Errors
+    * think about which are most probable and try to prevent
+    * make todos of one's not done
+  * Fail Early and Openly
+    * in C, return error code or abort process
+  * **Document Assumptions** -> clearly state pre-condition, post-condition, and invariants (programming by **contract**)
+    * **pre-condition** -> assumptions about state of the world before method executes
+      * method tells clients "this is what I expect from you"
+      * indicated by method setup
+    * **post-condition** -> indicates changes made to the state of the world by invoking a method
+      * method tells clients "this is what I promise to do for you"
+      * could be indicated by method name
+    * **invariants** -> aspects of the state that remain unchanged by invocation of a method
+      * method tells clients "if this was true before you called me, I promise it'll still be true when I'm done"
+      * methods that answer questions about the state of the world should change the state of the world
+  * **Prevention over Documentation** -> avoid documentaion (i.e,. comments) that which can be done with code or avoided completely
+  * **Automate**
+    * my testing should be as automated as possible
+  * Simplify and Clarify
+  * Question Authority
+* in short, follow **CREATE / DEFEND cycle**
+  * order is not important
+* try to fix Ruby C bug
