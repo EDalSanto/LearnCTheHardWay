@@ -292,3 +292,16 @@
 * in short, follow **CREATE / DEFEND cycle**
   * order is not important
 * try to fix Ruby C bug
+
+### Aside: C and Ruby
+* writing an extension in C provides speed and leverage
+  * really need speed and a well-defined problem
+* [rubygem](http://www.rakeroutes.com/blog/lets-write-a-gem-part-one/) recap
+* [Running C in Ruby](https://silverhammermba.github.io/emberb/extend/)
+  * make use of ruby's `mkmf` library and some conventions
+  * [toy gem](https://github.com/EDalSanto/RubyPlusC/tree/master)
+* possible to run Ruby in C too using eval
+* VALUE -> C data type for all Ruby objects
+  * C code passes around pointers to Ruby objects (like how variables in Ruby contains pointers to objects)
+  * need to verify the type
+* [Ruby C API](https://silverhammermba.github.io/emberb/c/)
