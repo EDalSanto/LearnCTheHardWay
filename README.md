@@ -315,3 +315,14 @@
   * make install -> software that is build and ready to run can now be copied to final destination
     * program's binary will be copied to directory on your `PATH`
   * programs built in this way usually rely on a suite of programs collectively referred to as autotools
+
+### Libraries and Linking
+* Linking -> how you get additional features for your program that someone else created
+* Two Types of Libraries
+  * **static** -> nothing more than a **container for a set of .o object files and their functions**
+    * can treat it **like one big .o file** when building programs
+  * **dynamic** -> OS dynamically loads files and links them **on the fly**
+    * exts include .so, .dll, .bundle, etc...
+    * can add library on the fly in program passing in as command line arguments
+
+### Common Undefined Behavior

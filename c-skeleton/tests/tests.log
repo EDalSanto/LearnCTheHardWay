@@ -1,0 +1,22 @@
+DEBUG tests/libfoo_tests.c:59: -----RUNNING: ./tests/libfoo_tests
+DEBUG tests/libfoo_tests.c:51: 
+----- test_dlopen
+[ERROR] (tests/libfoo_tests.c:22:test_dlopen errno: No such file or directory) Failed to open the library to test.
+DEBUG tests/libfoo_tests.c:59: -----RUNNING: ./tests/libfoo_tests
+DEBUG tests/libfoo_tests.c:51: 
+----- test_dlopen
+DEBUG tests/libfoo_tests.c:52: 
+----- test_functions
+DEBUG tests/libfoo_tests.c:53: 
+----- test_failures
+DEBUG tests/libfoo_tests.c:54: 
+----- test_dlclose
+DEBUG tests/libfoo_tests.c:59: -----RUNNING: ./tests/libfoo_tests
+DEBUG tests/libfoo_tests.c:51: 
+----- test_dlopen
+DEBUG tests/libfoo_tests.c:52: 
+----- test_functions
+DEBUG tests/libfoo_tests.c:53: 
+----- test_failures
+DEBUG tests/libfoo_tests.c:54: 
+----- test_dlclose
