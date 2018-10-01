@@ -295,7 +295,7 @@
 
 ### Aside: C and Ruby
 * writing an extension in C provides speed and leverage
-  * really need speed and a well-defined problem
+  * really need speed and a well-defined problem for this to be worth it
 * [rubygem](http://www.rakeroutes.com/blog/lets-write-a-gem-part-one/) recap
 * [Running C in Ruby](https://silverhammermba.github.io/emberb/extend/)
   * make use of ruby's `mkmf` library and some conventions
@@ -305,3 +305,13 @@
   * C code passes around pointers to Ruby objects (like how variables in Ruby contains pointers to objects)
   * need to verify the type
 * [Ruby C API](https://silverhammermba.github.io/emberb/c/)
+
+### Intermediate Makefiles
+* [configure, make and make install](https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install)
+  * **configure** -> responsible for **building software** on your **specific system**
+    * i.e., establishes whether system does indeed have a C compiler and finds out what it's called and where to find it
+  * make -> building software
+    * downloaded tarball usually has a Makefile template and the configure script produces a customized Makefile specific to system
+  * make install -> software that is build and ready to run can now be copied to final destination
+    * program's binary will be copied to directory on your `PATH`
+  * programs built in this way usually rely on a suite of programs collectively referred to as autotools
