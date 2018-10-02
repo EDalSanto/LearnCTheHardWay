@@ -326,3 +326,18 @@
     * can add library on the fly in program passing in as command line arguments
 
 ### Common Undefined Behavior
+* crux issue -> difference between the C abstract machine defined in the standard and real computers
+  * compiler writer can completely ignore abstract machine
+  * burden is on individual programmer to memorize all (~191) UBs and handled them
+* [why language designers tolerate undefined?](http://www.drdobbs.com/cpp/why-language-designers-tolerate-undefine/240165466)
+  * allowing undefined leads to some optimizations
+  * **in effect, the desire to define a compiler's behavior in a theoretically clean way conflicts with practical aspects how people use compilers**
+* [UndefinedBehaviorWhitePaper](https://people.csail.mit.edu/nickolai/papers/wang-undef-2012-08-21.pdf)
+
+### Double Linked List
+* pattern for making data structures:
+  * define a structure for the main outer structure
+  * define a structure for the contents, usually nodes with links between them
+  * create functions that operate on these two structures
+* lists in general provide classic fast work on first and last elements but are slow for traversal
+  * search, sorting and iterating over elements of list should be avoided
