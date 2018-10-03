@@ -6,30 +6,26 @@ List *List_create() {
   return calloc(1, sizeof(List));
 }
 
-void List_destroy(List *list) {
-  // generations all iteration code to loop through each node in list
+void List_clear_destroy(List *list) {
+  check(list != NULL, "List can't be NULL");
+
   LIST_FOREACH(list, first, next, cur) {
     if (cur->prev) {
       free(cur->prev);
+      free(cur->value);
     }
   }
 
   free(list->last);
   free(list);
-}
 
-void List_clear(List *list) {
-  LIST_FOREACH(list, first, next, cur) {
-    free(cur->value);
-  }
-}
-
-void List_clear_destroy(List *list) {
-  List_clear(list);
-  List_destroy(list);
+error:
+  return;
 }
 
 void List_push(List *list, void *value) {
+  check(list != NULL, "List can't be NULL");
+
   ListNode *node = calloc(1, sizeof(ListNode));
 
   node->value = value;
@@ -44,9 +40,14 @@ void List_push(List *list, void *value) {
   }
 
   list->count++;
+
+error:
+  return;
 }
 
 void *List_pop(List *list) {
+  check(list != NULL, "List can't be NULL");
+
   ListNode *node = list->last;
 
   if (node != NULL) {
@@ -54,9 +55,14 @@ void *List_pop(List *list) {
   } else {
     return NULL;
   }
+
+error:
+  return NULL;
 }
 
 void List_unshift(List *list, void *value) {
+  check(list != NULL, "List can't be NULL");
+
   ListNode *node = calloc(1, sizeof(ListNode));
   node->value = value;
 
@@ -70,9 +76,14 @@ void List_unshift(List *list, void *value) {
   }
 
   list->count++;
+
+error:
+  return;
 }
 
 void *List_shift(List *list) {
+  check(list != NULL, "List can't be NULL");
+
   ListNode *node = list->first;
 
   if (node != NULL) {
@@ -80,9 +91,15 @@ void *List_shift(List *list) {
   } else {
     return NULL;
   }
+
+
+error:
+  return NULL;
 }
 
 void *List_remove(List *list, ListNode *node) {
+  check(list != NULL, "List can't be NULL");
+
   void *result = NULL;
 
   check(list->first && list->last, "List is empty");
@@ -114,6 +131,7 @@ void *List_remove(List *list, ListNode *node) {
   free(node);
 
   return result;
+
 error:
   return NULL;
 }
