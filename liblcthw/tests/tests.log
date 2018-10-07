@@ -1,10 +1,12 @@
-DEBUG tests/list_tests.c:84: 
+DEBUG tests/list_tests.c:109: 
 ----- test_create
-DEBUG tests/list_tests.c:85: 
+DEBUG tests/list_tests.c:110: 
 ----- test_push_pop
-DEBUG tests/list_tests.c:86: 
+DEBUG tests/list_tests.c:111: 
 ----- test_copy
-DEBUG tests/list_tests.c:87: 
+DEBUG tests/list_tests.c:112: 
+----- test_join
+DEBUG tests/list_tests.c:113: 
 ----- test_unshift
-DEBUG tests/list_tests.c:88: 
+DEBUG tests/list_tests.c:114: 
 ----- test_remove

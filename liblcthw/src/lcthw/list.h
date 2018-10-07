@@ -30,6 +30,7 @@ void List_clear_destroy(List *list);
 #define List_first(A) ((A)->first != NULL ? (A)->first->value : NULL)
 #define List_last(A) ((A)->last != NULL ? (A)->last->value : NULL)
 
+List *List_join(List *list1, List *list2);
 void List_push(List *list, void *value);
 void *List_pop(List *list);
 

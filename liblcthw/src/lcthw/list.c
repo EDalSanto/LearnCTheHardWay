@@ -22,6 +22,21 @@ error:
   return NULL;
 }
 
+List *List_join(List *list1, List *list2) {
+  check(list1 != NULL, "List 1 can't be NULL");
+  check(list2 != NULL, "List 2 can't be NULL");
+
+  List *joined_list = List_copy(list1);
+  LIST_FOREACH(list2, first, next, cur) {
+    List_push(joined_list, cur->value);
+  }
+
+  return joined_list;
+
+error:
+  return NULL;
+}
+
 void List_clear_destroy(List *list) {
   check(list != NULL, "List can't be NULL");
 
