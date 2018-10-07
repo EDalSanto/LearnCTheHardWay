@@ -6,6 +6,22 @@ List *List_create() {
   return calloc(1, sizeof(List));
 }
 
+List *List_copy(List *list) {
+  check(list != NULL, "List can't be NULL");
+
+  List *list_copy = calloc(1, sizeof(List));
+
+  LIST_FOREACH(list, first, next, cur) {
+    // add node
+    List_push(list_copy, cur->value);
+  }
+
+  return list_copy;
+
+error:
+  return NULL;
+}
+
 void List_clear_destroy(List *list) {
   check(list != NULL, "List can't be NULL");
 

@@ -20,6 +20,7 @@ typedef struct List {
 } List;
 
 List *List_create();
+List *List_copy(List *list);
 void List_destroy(List *list);
 void List_clear(List *list);
 void List_clear_destroy(List *list);

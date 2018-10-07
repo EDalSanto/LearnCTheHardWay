@@ -23,6 +23,19 @@ void *test_clear_destroy() {
   return NULL;
 }
 
+void *test_copy() {
+  list = List_create();
+
+  List_push(list, test1);
+  List_push(list, test2);
+
+  List *list_copy = List_copy(list);
+  mu_assert(list_copy->first->value == test1, "Did not copy test 1 correctly");
+  mu_assert(list_copy->first->next->value == test2, "Did not copy test 2 correctly");
+
+  return NULL;
+}
+
 void *test_push_pop() {
   List_push(list, test1);
   mu_assert(list->last->value == test1, "Wrong value on push");
@@ -65,11 +78,12 @@ void *test_remove() {
   return NULL;
 }
 
-int main(int argc, char *argv[]) {
+int main() {
   mu_suite_start();
 
   mu_run_test(test_create);
   mu_run_test(test_push_pop);
+  mu_run_test(test_copy);
   mu_run_test(test_unshift);
   mu_run_test(test_remove);
 }
