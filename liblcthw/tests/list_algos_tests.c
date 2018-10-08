@@ -34,7 +34,9 @@ char *test_bubble_sort() {
   List *words = create_words();
 
   // should work on list that needs sorting
+  printf("words: %s\n", words);
   int rc = List_bubble_sort(words, (List_compare) strcmp);
+  printf("words: %s\n", words);
   mu_assert(rc == 0, "Bubble sort failed.");
   mu_assert(is_sorted(words), "Words are not sorted after bubble sort");
 
