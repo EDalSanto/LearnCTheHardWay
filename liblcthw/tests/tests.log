@@ -1,4 +1,6 @@
-DEBUG tests/list_algos_tests.c:76: -----RUNNING: ./tests/list_algos_tests
-DEBUG tests/list_algos_tests.c:70: 
+DEBUG tests/list_algos_tests.c:77: -----RUNNING: ./tests/list_algos_tests
+DEBUG tests/list_algos_tests.c:71: 
 ----- test_bubble_sort
-[ERROR] (tests/list_algos_tests.c:38:test_bubble_sort errno: None) Bubble sort failed.
+DEBUG tests/list_algos_tests.c:72: 
+----- test_merge_sort
+[ERROR] (tests/list_algos_tests.c:59:test_merge_sort errno: None) opps

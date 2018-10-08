@@ -37,6 +37,23 @@ error:
   return NULL;
 }
 
+void List_destroy(List *list) {
+  check(list != NULL, "List can't be NULL");
+
+  LIST_FOREACH(list, first, next, cur) {
+    if (cur->prev) {
+      free(cur->prev);
+    }
+  }
+
+  free(list->last);
+  free(list);
+
+error:
+  return;
+
+}
+
 void List_clear_destroy(List *list) {
   check(list != NULL, "List can't be NULL");
 
