@@ -9,6 +9,7 @@
 typedef int (*List_compare) (char *value1, char *value2);
 
 int List_bubble_sort(List *list, List_compare cmp);
+List *List_merge(List *left_list, List *right_list, List_compare cmp_cb);
 List *List_merge_sort(List *list, List_compare cmp);
 
 #endif

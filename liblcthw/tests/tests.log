@@ -1,7 +1,7 @@
-DEBUG tests/list_algos_tests.c:78: -----RUNNING: ./tests/list_algos_tests
-DEBUG tests/list_algos_tests.c:72: 
+DEBUG tests/list_algos_tests.c:76: -----RUNNING: ./tests/list_algos_tests
+DEBUG tests/list_algos_tests.c:70: 
 ----- test_bubble_sort
-DEBUG tests/list_algos_tests.c:73: 
+DEBUG tests/list_algos_tests.c:71: 
 ----- test_merge_sort
 DEBUG tests/list_tests.c:109: 
 ----- test_create
