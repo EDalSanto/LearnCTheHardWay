@@ -3,8 +3,9 @@
 #include <lcthw/list.h>
 #include <assert.h>
 #include <string.h>
+#include <time.h>
 
-char *values[] = { "XXXX", "1234", "abcd", "xjvef", "NDSS" };
+char *values[] = { "XXXX", "1234", "abcd", "xjvef", "NDSS", "foo", "bar", "baz", "fi", "fart" };
 
 #define NUM_VALUES 5
 
@@ -67,8 +68,25 @@ char *test_merge_sort() {
 char *all_tests() {
   mu_suite_start();
 
-  mu_run_test(test_bubble_sort);
-  mu_run_test(test_merge_sort);
+  time_t start_t, end_t;
+  double total_t;
+
+  start_t = time(&start_t);
+  int num_tests = 100000;
+  for (int i = 0; i < num_tests; i++) {
+    mu_run_test(test_bubble_sort);
+  }
+  end_t = time(&end_t);
+  total_t = difftime(end_t, start_t);
+  printf("avg bubble sort time: %f\n", total_t / num_tests);
+
+  start_t = time(&start_t);
+  for (int i = 0; i < num_tests; i++) {
+    mu_run_test(test_merge_sort);
+  }
+  end_t = time(&end_t);
+  total_t = difftime(end_t, start_t);
+  printf("avg merge sort time: %f\n", total_t / num_tests);
 
   return NULL;
 }

@@ -36,12 +36,16 @@ List *List_merge_sort(List *list, List_compare cmp_cb) {
   // consisting of the first half and second half of the list
   List *left_list = List_create();
   List *right_list = List_create();
+  int middle = list->count / 2;
   LIST_FOREACH(list, first, next, cur) {
-    if (right_list->count > left_list->count) { // even -> add to left
+    // get to middle
+    if (middle > 0) { // even -> add to left
       List_push(left_list, cur->value);
     } else { // odd -> add to right
       List_push(right_list, cur->value);
     }
+
+    middle--;
   }
   // sort each sublist
   left_list = List_merge_sort(left_list, cmp_cb);
