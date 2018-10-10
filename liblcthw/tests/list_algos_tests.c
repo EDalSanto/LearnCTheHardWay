@@ -65,6 +65,19 @@ char *test_merge_sort() {
   return NULL;
 }
 
+char *test_list_inserted_sort() {
+  List *words = create_words();
+  // sort
+  List_bubble_sort(words, (List_compare) strcmp);
+
+  List_inserted_sort(words, "Foo Bar Baz", (List_compare) strcmp);
+  // should work on a list that needs sorting
+  mu_assert(is_sorted(words), "Should be stored after list inserted sort.");
+
+  List_destroy(words);
+  return NULL;
+}
+
 char *all_tests() {
   mu_suite_start();
 
@@ -87,6 +100,8 @@ char *all_tests() {
   end_t = time(&end_t);
   total_t = difftime(end_t, start_t);
   printf("avg merge sort time: %f\n", total_t / num_tests);
+
+  mu_run_test(test_list_inserted_sort);
 
   return NULL;
 }

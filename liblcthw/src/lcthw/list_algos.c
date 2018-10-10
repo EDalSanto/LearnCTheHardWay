@@ -91,3 +91,38 @@ List *List_merge(List *left_list, List *right_list, List_compare cmp_cb) {
 
   return merged_list;
 }
+
+void List_inserted_sort(List *list, void *value, List_compare cmp_cb) {
+  // assert list not empty
+
+  // if not list->first, just set as first / last node
+  if (!list->first) {
+    List_push(list, value);
+    return;
+  }
+
+  ListNode *node = calloc(1, sizeof(ListNode));
+  node->value = value;
+  ListNode *cur = list->first;
+  int place_not_found = 1;
+
+  // iterate through list until find place for it
+  while (place_not_found && cur) {
+    // compare it with current
+    // if less, insert it before current
+    if (cmp_cb(cur->value, value) > 0) {
+      // insert it there
+      node->next = cur;
+      node->prev = cur->prev;
+      if (cur->prev) {
+        cur->prev->next = node;
+      }
+      cur->prev = node;
+      // mark as found
+      place_not_found = 0;
+    } else { // keep going
+      cur = cur->next;
+    }
+  }
+  list->count++;
+}
