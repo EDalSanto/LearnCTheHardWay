@@ -358,4 +358,8 @@
 * overview of binary search, [radix sort](https://brilliant.org/wiki/radix-sort/), and other sorting algos
 
 ### Safer Strings
+* C strings are inherently flawed: invalid C strings don't have terminating '\0' so you need the size to know when to stop looping
+* [Better String Library](http://bstring.sourceforge.net/) -> creates a structure that always includes the length of the string
+
+### Hashmaps
 *
