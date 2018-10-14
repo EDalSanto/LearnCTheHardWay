@@ -341,3 +341,21 @@
   * create functions that operate on these two structures
 * lists in general provide classic fast work on first and last elements but are slow for traversal
   * search, sorting and iterating over elements of list should be avoided
+
+### Dynamic Arrays
+* better for:
+  * simpler indexing, and no need for pointers
+  * random access indexing
+  * cloning
+  * sorting -> random access provides ability for many more sorting algos / optimizations
+  * large data -> takes less memory than same number of list node structs
+
+### Sorting and Searching
+* C Unions -> refer to same piece of memory in number of different ways
+  * union as picture of memory with elements in it as different colored lenses to view the picture
+  * saves memory or converts chunks of memory between formats
+    * used in many dynmic languages to convert between types like float, int, string
+* overview of binary search, [radix sort](https://brilliant.org/wiki/radix-sort/), and other sorting algos
+
+### Safer Strings
+*
